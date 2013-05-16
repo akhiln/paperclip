@@ -100,7 +100,7 @@ module Paperclip
         end unless defined?(AWS::Core)
 
         # Overriding AWS::Core::LogFormatter to make sure it return a UTF-8 string
-        if AWS::VERSION >= "1.3.9"
+        if Gem::Version.new(AWS::VERSION) >= Gem::Version.new("1.3.9")
           AWS::Core::LogFormatter.class_eval do
             def summarize_hash(hash)
               hash.map { |key, value| ":#{key}=>#{summarize_value(value)}".force_encoding('UTF-8') }.sort.join(',')
